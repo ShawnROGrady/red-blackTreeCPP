@@ -93,6 +93,28 @@ void redBlackTree::rightRotate(redBlackNode *newNode, redBlackNode *parent){
     parent->setParent(newNode);
     newNode->setRightChild(parent);
 }
+void redBlackTree::leftLeftCase(redBlackNode *grandparent, redBlackNode *parent){
+    rightRotate(parent, grandparent);
+    //swap colors of parent and granparent
+    if (parent->getBlack()){
+        parent->setBlack(false);
+        grandparent->setBlack(true);
+    }else{
+        parent->setBlack(true);
+        grandparent->setBlack(false);
+    }
+}
+void redBlackTree::rightRightCase(redBlackNode *grandparent, redBlackNode *parent){
+    leftRotate(parent, grandparent);
+    //swap colors of parent and granparent
+    if (parent->getBlack()){
+        parent->setBlack(false);
+        grandparent->setBlack(true);
+    }else{
+        parent->setBlack(true);
+        grandparent->setBlack(false);
+    }
+}
 //Traverse+Print Algorithms
 void redBlackTree::traverseAndPrintInorder(redBlackNode *root){
     if(root==NULL){
