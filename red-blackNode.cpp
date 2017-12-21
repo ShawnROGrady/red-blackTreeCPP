@@ -17,6 +17,7 @@ redBlackNode::redBlackNode(){
 }
 redBlackNode::redBlackNode(int v){
     value=v;
+    black=false; //I am making each node red by default
     parent=NULL;
     leftChild=NULL;
     rightChild=NULL;
