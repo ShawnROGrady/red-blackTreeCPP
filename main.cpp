@@ -12,32 +12,21 @@
  
  */
 #include <iostream>
-#include "red-blackNode.hpp"
+#include "red-BlackTree.hpp"
 
 //test function:
-void printInorder(redBlackNode *root){
-    if(root==NULL){
-        return;
-    }
-    else{
-        printInorder(root->getLeftChild());
-        std::cout<<root->getValue();
-        std::cout<<std::endl;
-        printInorder(root->getRightChild());
-    }
-}
+
 int main(int argc, const char * argv[]) {
-    redBlackNode *node1=new redBlackNode(4);
-    redBlackNode *node2=new redBlackNode(2);
-    redBlackNode *node3=new redBlackNode(1);
-    redBlackNode *node4=new redBlackNode(3);
-    node1->setLeftChild(node2);
-    node2->setParent(node1);
-    node2->setLeftChild(node3);
-    node3->setParent(node2);
-    node2->setRightChild(node4);
-    node4->setParent(node2);
-    
-    printInorder(node1);  //1 2 3 4
+    redBlackTree *tree=new redBlackTree();
+    tree->insertNode(4);
+    tree->insertNode(2);
+    tree->insertNode(1);
+    tree->insertNode(3);
+    tree->insertNode(6);
+    tree->insertNode(5);
+    tree->insertNode(7);
+    //tree->traverseAndPrintInorder(tree->getRoot()); // 1 2 3 4 5 6 7
+    //tree->traverseAndPrintPreorder(tree->getRoot()); // 4 2 1 3 6 5 7
+    tree->traverseAndPrintPostorder(tree->getRoot()); // 1 3 2 5 7 6 4
     return 0;
 }
