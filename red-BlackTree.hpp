@@ -86,16 +86,12 @@ void redBlackTree::leftRotate(redBlackNode *newNode, redBlackNode *parent){
     newNode->setParent(parent->getParent());
     parent->setParent(newNode);
     newNode->setLeftChild(parent);
-    parent->setLeftChild(NULL);
-    parent->setRightChild(NULL);
 }
 void redBlackTree::rightRotate(redBlackNode *newNode, redBlackNode *parent){
     //changes newNode from parent's rightChild to the new parent
     newNode->setParent(parent->getParent());
     parent->setParent(newNode);
     newNode->setRightChild(parent);
-    parent->setLeftChild(NULL);
-    parent->setRightChild(NULL);
 }
 //Traverse+Print Algorithms
 void redBlackTree::traverseAndPrintInorder(redBlackNode *root){
