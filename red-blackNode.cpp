@@ -55,3 +55,20 @@ redBlackNode* redBlackNode::getLeftChild(){
 redBlackNode* redBlackNode::getRightChild(){
     return rightChild;
 }
+redBlackNode* redBlackNode::getGrandParent(){
+    redBlackNode *grandparent=parent->getParent();
+    return grandparent;
+}
+redBlackNode* redBlackNode::getUncle(){
+    redBlackNode *grandparent=getGrandParent();
+    redBlackNode *uncle;
+    if(grandparent->getValue()>value){
+        //current node is left of grandparent, so uncle is grandparents left child
+        uncle=grandparent->getRightChild();
+    }
+    else{
+        //current node is right of grandparent, so uncle is grandparents right child
+        uncle=grandparent->getLeftChild();
+    }
+    return uncle;
+}
