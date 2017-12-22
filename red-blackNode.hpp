@@ -33,5 +33,7 @@ public:
     redBlackNode* getParent();
     redBlackNode* getLeftChild();
     redBlackNode* getRightChild();
+    redBlackNode* getGrandParent();
+    redBlackNode* getUncle();
 };
 #endif /* red_blackNode_hpp */

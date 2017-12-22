@@ -15,6 +15,12 @@ class redBlackTree{
 private:
     redBlackNode *root;
     int blackHeight;
+protected:
+    void checkInsert(redBlackNode* newNode);
+    void leftRotate(redBlackNode* pivot, redBlackNode* parent);
+    void rightRotate(redBlackNode* pivot, redBlackNode* parent);
+    void leftLeftCase(redBlackNode*grandparent, redBlackNode*parent);
+    void rightRightCase(redBlackNode*grandparent, redBlackNode*parent);
 public:
     redBlackTree();
     bool isEmpty();
