@@ -72,10 +72,12 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                         parent->setBlack(true);
                         uncle->setBlack(true);
                         grandparent->setBlack(false);
+                        /*
                         //swap newNode and newNode's grandparent
                         int newNodeValue=newNode->getValue();
                         newNode->setValue(grandparent->getValue());
                         grandparent->setValue(newNodeValue);
+                         */
                         //repeat
                         checkInsert(grandparent);
                     }
@@ -107,21 +109,56 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                         }
                     }
                 }
+                else{
+                    //newNode's uncle is null, which is considered black
+                    if(grandparent->getLeftChild()==parent){
+                        if(parent->getLeftChild()==newNode){
+                            //left-left case
+                            rightRotate(parent, grandparent);
+                            leftLeftCase(grandparent, parent);
+                        }
+                        else if(parent->getRightChild()==newNode){
+                            //left-right case
+                            leftRotate(newNode, parent);
+                            leftLeftCase(grandparent, parent);
+                        }
+                    }
+                    else if(grandparent->getRightChild()==parent){
+                        if(parent->getRightChild()==newNode){
+                            //right-right case
+                            leftRotate(parent, grandparent);
+                            rightRightCase(grandparent, parent);
+                        }
+                        else if(parent->getLeftChild()==newNode){
+                            //right-left case
+                            rightRotate(newNode, parent);
+                            rightRightCase(grandparent, parent);
+                        }
+                    }
+                }
             }
         }
     }
 }
 void redBlackTree::leftRotate(redBlackNode *newNode, redBlackNode *parent){
     //changes newNode from parent's leftChild to the new parent
+    if(root==parent){
+        root=newNode;
+    }
     newNode->setParent(parent->getParent());
     parent->setParent(newNode);
     newNode->setLeftChild(parent);
+    parent->setRightChild(NULL);
 }
 void redBlackTree::rightRotate(redBlackNode *newNode, redBlackNode *parent){
     //changes newNode from parent's rightChild to the new parent
     newNode->setParent(parent->getParent());
     parent->setParent(newNode);
     newNode->setRightChild(parent);
+    parent->setLeftChild(NULL);
+    if(root==parent){
+        root=newNode;
+    }
 }
 void redBlackTree::leftLeftCase(redBlackNode *grandparent, redBlackNode *parent){
     rightRotate(parent, grandparent);
