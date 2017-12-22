@@ -60,24 +60,54 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
         newNode->setBlack(true);    //root is black (rule 2)
     }
     redBlackNode *parent=newNode->getParent();
-    if((!parent->getBlack())||newNode!=root){
-        //if newNode's parent is not black or x is not root
-        redBlackNode *grandparent=newNode->getGrandParent();
-        redBlackNode *uncle=newNode->getUncle();
-        if(!uncle->getBlack()){
-            //newNode's uncle is red, need to recolor
-            parent->setBlack(true);
-            uncle->setBlack(true);
-            grandparent->setBlack(false);
-            //swap newNode and newNode's grandparent
-            int newNodeValue=newNode->getValue();
-            newNode->setValue(grandparent->getValue());
-            grandparent->setValue(newNodeValue);
-            //repeat
-            checkInsert(grandparent);
-        }
-        else{
-            //newNode's uncle is black, four cases to consider
+    if(parent!=NULL){
+        if((!parent->getBlack())||newNode!=root){
+            //if newNode's parent is not black or x is not root
+            redBlackNode *grandparent=newNode->getGrandParent();
+            if(grandparent!=NULL){
+                redBlackNode *uncle=newNode->getUncle();
+                if(uncle!=NULL){
+                    if(!uncle->getBlack()){
+                        //newNode's uncle is red, need to recolor
+                        parent->setBlack(true);
+                        uncle->setBlack(true);
+                        grandparent->setBlack(false);
+                        //swap newNode and newNode's grandparent
+                        int newNodeValue=newNode->getValue();
+                        newNode->setValue(grandparent->getValue());
+                        grandparent->setValue(newNodeValue);
+                        //repeat
+                        checkInsert(grandparent);
+                    }
+                    else{
+                        //newNode's uncle is black, four cases to consider
+                        if(grandparent->getLeftChild()==parent){
+                            if(parent->getLeftChild()==newNode){
+                                //left-left case
+                                rightRotate(parent, grandparent);
+                                leftLeftCase(grandparent, parent);
+                            }
+                            else if(parent->getRightChild()==newNode){
+                                //left-right case
+                                leftRotate(newNode, parent);
+                                leftLeftCase(grandparent, parent);
+                            }
+                        }
+                        else if(grandparent->getRightChild()==parent){
+                            if(parent->getRightChild()==parent){
+                                //right-right case
+                                leftRotate(parent, grandparent);
+                                rightRightCase(grandparent, parent);
+                            }
+                            else if(parent->getLeftChild()==newNode){
+                                //right-left case
+                                rightRotate(newNode, parent);
+                                rightRightCase(grandparent, parent);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
