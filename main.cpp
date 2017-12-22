@@ -18,15 +18,13 @@
 
 int main(int argc, const char * argv[]) {
     redBlackTree *tree=new redBlackTree();
-    tree->insertNode(4);
-    tree->insertNode(2);
-    tree->insertNode(1);
-    tree->insertNode(3);
-    tree->insertNode(6);
-    tree->insertNode(5);
-    tree->insertNode(7);
-    //tree->traverseAndPrintInorder(tree->getRoot()); // 1 2 3 4 5 6 7
-    //tree->traverseAndPrintPreorder(tree->getRoot()); // 4 2 1 3 6 5 7
-    tree->traverseAndPrintPostorder(tree->getRoot()); // 1 3 2 5 7 6 4
+    tree->insertNode(10);
+    tree->insertNode(20);
+    tree->insertNode(30);
+    //std::cout<<tree->getRoot()->getValue();
+    tree->insertNode(15);
+    //tree->traverseAndPrintInorder(tree->getRoot()); // 10 15 20 30
+    tree->traverseAndPrintPreorder(tree->getRoot()); // 20 10 15 30
+    //tree->traverseAndPrintPostorder(tree->getRoot()); // 30 15 10 20
     return 0;
 }
