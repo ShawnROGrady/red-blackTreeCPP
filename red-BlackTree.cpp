@@ -86,7 +86,6 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                         if(grandparent->getLeftChild()==parent){
                             if(parent->getLeftChild()==newNode){
                                 //left-left case
-                                rightRotate(parent, grandparent);
                                 leftLeftCase(grandparent, parent);
                             }
                             else if(parent->getRightChild()==newNode){
@@ -96,9 +95,8 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                             }
                         }
                         else if(grandparent->getRightChild()==parent){
-                            if(parent->getRightChild()==parent){
+                            if(parent->getRightChild()==newNode){
                                 //right-right case
-                                leftRotate(parent, grandparent);
                                 rightRightCase(grandparent, parent);
                             }
                             else if(parent->getLeftChild()==newNode){
@@ -114,7 +112,6 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                     if(grandparent->getLeftChild()==parent){
                         if(parent->getLeftChild()==newNode){
                             //left-left case
-                            rightRotate(parent, grandparent);
                             leftLeftCase(grandparent, parent);
                         }
                         else if(parent->getRightChild()==newNode){
@@ -126,7 +123,6 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                     else if(grandparent->getRightChild()==parent){
                         if(parent->getRightChild()==newNode){
                             //right-right case
-                            leftRotate(parent, grandparent);
                             rightRightCase(grandparent, parent);
                         }
                         else if(parent->getLeftChild()==newNode){
@@ -140,25 +136,37 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
         }
     }
 }
-void redBlackTree::leftRotate(redBlackNode *newNode, redBlackNode *parent){
-    //changes newNode from parent's leftChild to the new parent
+void redBlackTree::leftRotate(redBlackNode *pivot, redBlackNode *parent){
+    //changes pivot from parent's rightChild to the new parent
     if(root==parent){
-        root=newNode;
+        root=pivot;
     }
-    newNode->setParent(parent->getParent());
-    parent->setParent(newNode);
-    newNode->setLeftChild(parent);
-    parent->setRightChild(NULL);
+    pivot->setParent(parent->getParent());
+    if(parent->getParent()!=NULL){
+        (parent->getParent())->setRightChild(pivot);
+    }
+    parent->setRightChild(pivot->getLeftChild());
+    if(pivot->getLeftChild()!=NULL){
+        (pivot->getLeftChild())->setParent(parent);
+    }
+    pivot->setLeftChild(parent);
+    parent->setParent(pivot);
 }
-void redBlackTree::rightRotate(redBlackNode *newNode, redBlackNode *parent){
-    //changes newNode from parent's rightChild to the new parent
-    newNode->setParent(parent->getParent());
-    parent->setParent(newNode);
-    newNode->setRightChild(parent);
-    parent->setLeftChild(NULL);
+void redBlackTree::rightRotate(redBlackNode *pivot, redBlackNode *parent){
+    //changes pivot from parent's leftChild to the new parent
     if(root==parent){
-        root=newNode;
+        root=pivot;
     }
+    pivot->setParent(parent->getParent());
+    if(parent->getParent()!=NULL){
+        (parent->getParent())->setLeftChild(pivot);
+    }
+    parent->setLeftChild(pivot->getRightChild());
+    if(pivot->getRightChild()!=NULL){
+        (pivot->getRightChild())->setParent(parent);
+    }
+    pivot->setRightChild(parent);
+    parent->setParent(pivot);
 }
 void redBlackTree::leftLeftCase(redBlackNode *grandparent, redBlackNode *parent){
     rightRotate(parent, grandparent);
