@@ -30,5 +30,6 @@ public:
     void traverseAndPrintInorder(redBlackNode *root);
     void traverseAndPrintPreorder(redBlackNode *root);
     void traverseAndPrintPostorder(redBlackNode *root);
+    redBlackNode * findNode(int target);
 };
 #endif /* red_BlackTree_hpp */
