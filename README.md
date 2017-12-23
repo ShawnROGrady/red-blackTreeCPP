@@ -13,3 +13,5 @@ My end goal is to implement a binary search tree that takes user input to perfor
   3. print the entire tree (inorder, preorder, or postorder)
   4. search the tree for a specified value
   5. close the program
+
+All files were written and tested in Xcode version 9.2
