@@ -14,6 +14,7 @@
     4. Every path from root to a NULL node has same number of black nodes
  +I currently believe I can:
     -Insert a value
+    -search the tree
 */
 #include <iostream>
 #include "red-BlackTree.hpp"
@@ -225,4 +226,20 @@ void redBlackTree::traverseAndPrintPostorder(redBlackNode *root){
         std::cout<<root->getValue();
         std::cout<<std::endl;
     }
+}
+
+redBlackNode* redBlackTree::findNode(int target){
+    redBlackNode *tmp=root;
+    while(tmp!=NULL){
+        if(target<tmp->getValue()){
+            tmp=tmp->getLeftChild();
+        }
+        else if(target<tmp->getValue()){
+            tmp=tmp->getRightChild();
+        }
+        else{
+            return tmp;
+        }
+    }
+    return NULL;    //if we get here target is not in tree
 }
