@@ -234,7 +234,7 @@ redBlackNode* redBlackTree::findNode(int target){
         if(target<tmp->getValue()){
             tmp=tmp->getLeftChild();
         }
-        else if(target<tmp->getValue()){
+        else if(target>tmp->getValue()){
             tmp=tmp->getRightChild();
         }
         else{
