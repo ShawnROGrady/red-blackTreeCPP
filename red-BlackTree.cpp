@@ -12,6 +12,8 @@
     3. There ar no two adjacent red nodes
         -i.e. a red node can't have a red parent or a red child
     4. Every path from root to a NULL node has same number of black nodes
+ +I currently believe I can:
+    -Insert a value
 */
 #include <iostream>
 #include "red-BlackTree.hpp"
