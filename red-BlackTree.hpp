@@ -26,7 +26,7 @@ public:
     bool isEmpty();
     redBlackNode *getRoot();
     void insertNode(int newEntry);
-    void removeNode(redBlackNode* target);
+    void removeNode(int target);
     void traverseAndPrintInorder(redBlackNode *root);
     void traverseAndPrintPreorder(redBlackNode *root);
     void traverseAndPrintPostorder(redBlackNode *root);
