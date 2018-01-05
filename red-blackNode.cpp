@@ -18,6 +18,7 @@ redBlackNode::redBlackNode(){
 redBlackNode::redBlackNode(int v){
     value=v;
     black=false; //I am making each node red by default
+    doubleBlack=false;
     parent=NULL;
     leftChild=NULL;
     rightChild=NULL;
@@ -29,6 +30,9 @@ void redBlackNode::setValue(int v){
 }
 void redBlackNode::setBlack(bool b){
     black=b;
+}
+void redBlackNode::setDoubleBlack(bool b){
+    doubleBlack=b;
 }
 void redBlackNode::setParent(redBlackNode *newParent){
     parent=newParent;
@@ -45,6 +49,9 @@ int redBlackNode::getValue(){
 }
 bool redBlackNode::getBlack(){
     return black;
+}
+bool redBlackNode::getDoubleBlack(){
+    return doubleBlack;
 }
 redBlackNode* redBlackNode::getParent(){
     return parent;
