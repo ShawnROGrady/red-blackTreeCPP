@@ -21,6 +21,10 @@ protected:
     void rightRotate(redBlackNode* pivot, redBlackNode* parent);
     void leftLeftCase(redBlackNode*grandparent, redBlackNode*parent);
     void rightRightCase(redBlackNode*grandparent, redBlackNode*parent);
+    void removeNoChild(redBlackNode* target, redBlackNode*parent);
+    void removeLeftChild(redBlackNode* target, redBlackNode*parent);
+    void removeRightChild(redBlackNode* target, redBlackNode* parent);
+    void removeTwoChild(redBlackNode* target, redBlackNode* righTreeMin);
 public:
     redBlackTree();
     bool isEmpty();
