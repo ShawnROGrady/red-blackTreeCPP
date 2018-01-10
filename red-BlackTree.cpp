@@ -289,3 +289,44 @@ void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
     delete target;
     target=NULL;
 }
+void redBlackTree::removeLeftChild(redBlackNode *target, redBlackNode *parent){
+    if(target->getValue()<parent->getValue()){
+        //target node is left child
+        parent->setLeftChild(target->getLeftChild());
+        (target->getLeftChild())->setParent(parent);
+        if(target==root){
+            //readjust root pointer if deleting root
+            root=target->getLeftChild();
+        }
+    }
+    else{
+        //target node is right child
+        parent->setRightChild(target->getLeftChild());
+        (target->getLeftChild())->setParent(parent);
+        if(target==root){
+            //readjust root pointer if deleting root
+            root=target->getLeftChild();
+        }
+    }
+}
+void redBlackTree::removeRightChild(redBlackNode *target, redBlackNode *parent){
+    if(target->getValue()<parent->getValue()){
+        //target node is left child
+        parent->setLeftChild(target->getRightChild());
+        (target->getRightChild())->setParent(parent);
+        if(target==root){
+            //readjust root pointer if deleting root
+            root=target->getRightChild();
+        }
+    }
+    else{
+        //target node is right child
+        parent->setRightChild(target->getRightChild());
+        (target->getRightChild())->setParent(parent);
+        if(target==root){
+            //readjust root pointer if deleting root
+            root=target->getRightChild();
+        }
+    }
+}
+
