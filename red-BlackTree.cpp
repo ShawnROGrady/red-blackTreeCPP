@@ -243,3 +243,10 @@ redBlackNode* redBlackTree::findNode(int target){
     }
     return NULL;    //if we get here target is not in tree
 }
+
+redBlackNode* redBlackTree::findSubtreeMin(redBlackNode *subTreeRoot){
+    while(subTreeRoot->getLeftChild()!=NULL){
+        subTreeRoot=subTreeRoot->getLeftChild();
+    }
+    return subTreeRoot;
+}
