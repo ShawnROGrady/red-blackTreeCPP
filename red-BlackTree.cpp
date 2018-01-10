@@ -274,6 +274,8 @@ void redBlackTree::removeNode(int target){
         }
         else{
             //Case 3: two children
+            redBlackNode *subTreeMin=findSubtreeMin(targetNode);
+            removeTwoChild(targetNode, subTreeMin);
         }
     }
 }
@@ -327,6 +329,16 @@ void redBlackTree::removeRightChild(redBlackNode *target, redBlackNode *parent){
             //readjust root pointer if deleting root
             root=target->getRightChild();
         }
+    }
+}
+void redBlackTree::removeTwoChild(redBlackNode *target, redBlackNode *rightTreeMin){
+    //int targetValue=target->getValue();
+    target->setValue(rightTreeMin->getValue());
+    if(rightTreeMin->getRightChild()==NULL){
+        removeNoChild(rightTreeMin, rightTreeMin->getParent());
+    }
+    else{
+        removeRightChild(rightTreeMin, rightTreeMin->getParent());
     }
 }
 
