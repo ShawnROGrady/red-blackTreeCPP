@@ -274,7 +274,7 @@ void redBlackTree::removeNode(int target){
         }
         else{
             //Case 3: two children
-            redBlackNode *subTreeMin=findSubtreeMin(targetNode);
+            redBlackNode *subTreeMin=findSubtreeMin(targetNode->getRightChild());
             removeTwoChild(targetNode, subTreeMin);
         }
     }
