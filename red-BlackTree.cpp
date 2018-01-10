@@ -250,3 +250,42 @@ redBlackNode* redBlackTree::findSubtreeMin(redBlackNode *subTreeRoot){
     }
     return subTreeRoot;
 }
+
+void redBlackTree::removeNode(int target){
+    redBlackNode *targetNode=findNode(target);
+    if(targetNode==NULL){
+        //not in tree
+        return;
+    }
+    else{
+        redBlackNode *parent=targetNode->getParent();
+        //Three cases to consider
+        if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()==NULL){
+            //Case 1: No child
+            removeNoChild(targetNode, parent);
+        }
+        else if(targetNode->getLeftChild()!=NULL&&targetNode->getRightChild()==NULL){
+            //Case 2(a): only left childe
+            removeLeftChild(targetNode, parent);
+        }
+        else if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()!=NULL){
+            //Case 2(b):only right child
+            removeRightChild(targetNode, parent);
+        }
+        else{
+            //Case 3: two children
+        }
+    }
+}
+void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
+    if(target->getValue()<parent->getValue()){
+        //target node is left child
+        parent->setLeftChild(NULL);
+    }
+    else{
+        //target node is right child
+        parent->setRightChild(NULL);
+    }
+    delete target;
+    target=NULL;
+}
