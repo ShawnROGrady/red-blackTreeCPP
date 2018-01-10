@@ -24,7 +24,7 @@ protected:
     void removeNoChild(redBlackNode* target, redBlackNode*parent);
     void removeLeftChild(redBlackNode* target, redBlackNode*parent);
     void removeRightChild(redBlackNode* target, redBlackNode* parent);
-    void removeTwoChild(redBlackNode* target, redBlackNode* righTreeMin);
+    void removeTwoChild(redBlackNode* target, redBlackNode* rightTreeMin);
     redBlackNode* findSubtreeMin(redBlackNode* subTreeRoot);
 public:
     redBlackTree();
