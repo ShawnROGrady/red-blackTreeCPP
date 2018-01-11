@@ -263,7 +263,7 @@ void redBlackTree::removeNode(int target){
         //Three cases to consider
         if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()==NULL){
             //Case 1: No child
-            replacementNode=NULL;
+            replacementNode=new redBlackNode;
             removeNoChild(targetNode, parent);
         }
         else if(targetNode->getLeftChild()!=NULL&&targetNode->getRightChild()==NULL){
@@ -352,6 +352,9 @@ void redBlackTree::removeTwoChild(redBlackNode *target, redBlackNode *rightTreeM
     }
 }
 void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
-    
+    if(!(target->getBlack()&&replacement->getBlack())){
+        //if either target or replacement is red (easy case)
+        replacement->setBlack(true);
+    }
 }
 
