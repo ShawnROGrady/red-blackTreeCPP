@@ -259,24 +259,30 @@ void redBlackTree::removeNode(int target){
     }
     else{
         redBlackNode *parent=targetNode->getParent();
+        redBlackNode *replacementNode;  //node that replaces targetNode upon removal
         //Three cases to consider
         if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()==NULL){
             //Case 1: No child
+            replacementNode=NULL;
             removeNoChild(targetNode, parent);
         }
         else if(targetNode->getLeftChild()!=NULL&&targetNode->getRightChild()==NULL){
-            //Case 2(a): only left childe
+            //Case 2(a): only left child
+            replacementNode=targetNode->getLeftChild();
             removeLeftChild(targetNode, parent);
         }
         else if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()!=NULL){
             //Case 2(b):only right child
+            replacementNode=targetNode->getRightChild();
             removeRightChild(targetNode, parent);
         }
         else{
             //Case 3: two children
             redBlackNode *subTreeMin=findSubtreeMin(targetNode->getRightChild());
+            replacementNode=subTreeMin;
             removeTwoChild(targetNode, subTreeMin);
         }
+        checkRemove(targetNode, replacementNode);    //rebalance the tree
     }
 }
 void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
@@ -344,5 +350,8 @@ void redBlackTree::removeTwoChild(redBlackNode *target, redBlackNode *rightTreeM
     else{
         removeRightChild(rightTreeMin, rightTreeMin->getParent());
     }
+}
+void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
+    
 }
 
