@@ -288,8 +288,8 @@ void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
         //target node is right child
         parent->setRightChild(NULL);
     }
-    delete target;
-    target=NULL;
+    //delete target;
+    //target=NULL;
 }
 void redBlackTree::removeLeftChild(redBlackNode *target, redBlackNode *parent){
     if(target->getValue()<parent->getValue()){
@@ -310,8 +310,8 @@ void redBlackTree::removeLeftChild(redBlackNode *target, redBlackNode *parent){
             root=target->getLeftChild();
         }
     }
-    delete target;
-    target=NULL;
+    //delete target;
+    //target=NULL;
 }
 void redBlackTree::removeRightChild(redBlackNode *target, redBlackNode *parent){
     if(target->getValue()<parent->getValue()){
@@ -332,8 +332,8 @@ void redBlackTree::removeRightChild(redBlackNode *target, redBlackNode *parent){
             root=target->getRightChild();
         }
     }
-    delete target;
-    target=NULL;
+    //delete target;
+    //target=NULL;
 }
 void redBlackTree::removeTwoChild(redBlackNode *target, redBlackNode *rightTreeMin){
     //int targetValue=target->getValue();
