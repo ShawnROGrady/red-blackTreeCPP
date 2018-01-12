@@ -9,7 +9,7 @@
  For now the main function is just responsible for testing
     -later will be taking user input
  reference: http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/
- 
+ reference: https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
  */
 #include <iostream>
 #include "red-BlackTree.hpp"
@@ -26,6 +26,7 @@ int main(int argc, const char * argv[]) {
     //tree->traverseAndPrintPreorder(tree->getRoot()); // 2 1 4 3 6 5 7
     tree->traverseAndPrintPostorder(tree->getRoot()); // 1 3 5 7 6 4 2
     */
+    
     for(int i=1; i<9; i++){
         tree->insertNode(i);
     }
@@ -39,11 +40,16 @@ int main(int argc, const char * argv[]) {
     else{
         std::cout<<"that is not in the tree"<<std::endl;
     }
+    /*
     tree->removeNode(1);    //no child
     tree->removeNode(2);    //left child
     tree->removeNode(7);    //right child
     tree->removeNode(4);    //two children
-    tree->traverseAndPrintInorder(tree->getRoot()); // 3 5 6 8
+    */
+    tree->removeNode(4);
+    //tree->removeNode(3);
+    tree->traverseAndPrintPreorder(tree->getRoot()); // 3 5 6 8
+    
     /*
     tree->insertNode(10);
     tree->insertNode(20);
