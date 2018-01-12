@@ -46,6 +46,9 @@ void redBlackNode::setBlack(bool b){
 void redBlackNode::setDoubleBlack(bool b){
     doubleBlack=b;
 }
+void redBlackNode::setNULL(bool b){
+    isNULL=b;
+}
 void redBlackNode::setParent(redBlackNode *newParent){
     parent=newParent;
 }
