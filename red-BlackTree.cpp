@@ -253,7 +253,7 @@ redBlackNode* redBlackTree::findNode(int target){
 }
 
 redBlackNode* redBlackTree::findSubtreeMin(redBlackNode *subTreeRoot){
-    while(subTreeRoot->getLeftChild()!=NULL){
+    while(!(subTreeRoot->getLeftChild()->getNULL())){
         subTreeRoot=subTreeRoot->getLeftChild();
     }
     return subTreeRoot;
@@ -269,17 +269,18 @@ void redBlackTree::removeNode(int target){
         redBlackNode *parent=targetNode->getParent();
         redBlackNode *replacementNode;  //node that replaces targetNode upon removal
         //Three cases to consider
-        if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()==NULL){
+        if((targetNode->getLeftChild()->getNULL())&&(targetNode->getRightChild()->getNULL())){
             //Case 1: No child
             replacementNode=targetNode->getLeftChild();
             removeNoChild(targetNode, parent);
+            replacementNode->setNULL(true);
         }
-        else if(targetNode->getLeftChild()!=NULL&&targetNode->getRightChild()==NULL){
+        else if(!(targetNode->getLeftChild()->getNULL())&&(targetNode->getRightChild()->getNULL())){
             //Case 2(a): only left child
             replacementNode=targetNode->getLeftChild();
             removeLeftChild(targetNode, parent);
         }
-        else if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()!=NULL){
+        else if((targetNode->getLeftChild()->getNULL())&&!(targetNode->getRightChild()->getNULL())){
             //Case 2(b):only right child
             replacementNode=targetNode->getRightChild();
             removeRightChild(targetNode, parent);
@@ -290,7 +291,7 @@ void redBlackTree::removeNode(int target){
             replacementNode=subTreeMin;
             removeTwoChild(targetNode, subTreeMin);
         }
-        checkRemove(targetNode, replacementNode);    //rebalance the tree
+        //checkRemove(targetNode, replacementNode);    //rebalance the tree
     }
 }
 void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
