@@ -299,7 +299,8 @@ void redBlackTree::removeNode(int target){
             //Case 3: two children
             redBlackNode *subTreeMin=findSubtreeMin(targetNode->getRightChild());
             removeTwoChild(targetNode, subTreeMin);
-            checkRemove(subTreeMin, targetNode);    //rebalance the tree
+            replacementNode=subTreeMin->getRightChild();
+            checkRemove(subTreeMin, replacementNode);    //rebalance the tree
         }
     }
 }
