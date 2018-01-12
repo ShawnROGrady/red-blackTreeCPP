@@ -27,6 +27,7 @@ public:
     void setValue(int v);
     void setBlack(bool b);
     void setDoubleBlack(bool b);
+    void setNULL(bool b);
     void setParent(redBlackNode *newParent);
     void setLeftChild(redBlackNode *newLeftChild);
     void setRightChild(redBlackNode *newRightChild);
