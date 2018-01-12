@@ -15,6 +15,7 @@ private:
     int value;
     bool black;
     bool doubleBlack;
+    bool isNULL;
     redBlackNode *parent;
     redBlackNode *leftChild;
     redBlackNode *rightChild;
@@ -33,6 +34,7 @@ public:
     int getValue();
     bool getBlack();
     bool getDoubleBlack();
+    bool getNULL();
     redBlackNode* getParent();
     redBlackNode* getLeftChild();
     redBlackNode* getRightChild();
