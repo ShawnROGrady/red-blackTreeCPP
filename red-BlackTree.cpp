@@ -421,6 +421,7 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                          else{
                              //both of sibling's children are black
                              replacement->setDoubleBlack(false);
+                             sibling->setBlack(false);
                              if(parent->getBlack()){
                                 //parent is black
                                  parent->setDoubleBlack(true);
@@ -436,6 +437,7 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                     else{
                         //both of siblings children are NULL, treat as black
                         replacement->setDoubleBlack(false);
+                        sibling->setBlack(false);
                         if(parent->getBlack()){
                             //parent is black
                             parent->setDoubleBlack(true);
