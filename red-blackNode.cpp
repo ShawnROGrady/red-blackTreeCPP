@@ -81,3 +81,13 @@ redBlackNode* redBlackNode::getUncle(){
     }
     return uncle;
 }
+redBlackNode* redBlackNode::getSibling(){
+    if(parent->getValue()>value){
+        //current node is left child
+        return parent->getRightChild();
+    }
+    else{
+        //current node is right child
+        return parent->getLeftChild();
+    }
+}
