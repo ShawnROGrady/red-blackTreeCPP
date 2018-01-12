@@ -17,6 +17,7 @@ private:
     int blackHeight;
 protected:
     void checkInsert(redBlackNode* newNode);
+    void checkRemove(redBlackNode* target, redBlackNode* replacement);
     void leftRotate(redBlackNode* pivot, redBlackNode* parent);
     void rightRotate(redBlackNode* pivot, redBlackNode* parent);
     void leftLeftCase(redBlackNode*grandparent, redBlackNode*parent);
