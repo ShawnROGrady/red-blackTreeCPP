@@ -33,12 +33,14 @@ void redBlackTree::insertNode(int newEntry){
     redBlackNode *newNode=new redBlackNode(newEntry);
     redBlackNode *tmp=root;
     redBlackNode *parent=nullptr;
-    while(tmp!=NULL){
-        parent=tmp;
-        if(newNode->getValue()<tmp->getValue()){
-            tmp=tmp->getLeftChild();
-        }else{
-            tmp=tmp->getRightChild();
+    if(tmp!=NULL){
+        while(!tmp->getNULL()){
+            parent=tmp;
+            if(newNode->getValue()<tmp->getValue()){
+                tmp=tmp->getLeftChild();
+            }else{
+                tmp=tmp->getRightChild();
+            }
         }
     }
     if(parent==NULL){
@@ -206,7 +208,7 @@ void redBlackTree::traverseAndPrintInorder(redBlackNode *root){
     }
 }
 void redBlackTree::traverseAndPrintPreorder(redBlackNode *root){
-    if(root==NULL){
+    if(root->getNULL()){
         return;
     }
     else{
@@ -269,9 +271,7 @@ void redBlackTree::removeNode(int target){
         //Three cases to consider
         if(targetNode->getLeftChild()==NULL&&targetNode->getRightChild()==NULL){
             //Case 1: No child
-            replacementNode=new redBlackNode;
-            replacementNode->setParent(targetNode);
-            targetNode->setLeftChild(replacementNode);
+            replacementNode=targetNode->getLeftChild();
             removeNoChild(targetNode, parent);
         }
         else if(targetNode->getLeftChild()!=NULL&&targetNode->getRightChild()==NULL){
@@ -296,11 +296,11 @@ void redBlackTree::removeNode(int target){
 void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
     if(target->getValue()<parent->getValue()){
         //target node is left child
-        parent->setLeftChild(NULL);
+        parent->setLeftChild(new redBlackNode);
     }
     else{
         //target node is right child
-        parent->setRightChild(NULL);
+        parent->setRightChild(new redBlackNode);
     }
     //delete target;
     //target=NULL;
