@@ -14,6 +14,8 @@ class redBlackNode{
 private:
     int value;
     bool black;
+    bool doubleBlack;
+    bool isNULL;
     redBlackNode *parent;
     redBlackNode *leftChild;
     redBlackNode *rightChild;
@@ -24,16 +26,21 @@ public:
     //setters:
     void setValue(int v);
     void setBlack(bool b);
+    void setDoubleBlack(bool b);
+    void setNULL(bool b);
     void setParent(redBlackNode *newParent);
     void setLeftChild(redBlackNode *newLeftChild);
     void setRightChild(redBlackNode *newRightChild);
     //getters
     int getValue();
     bool getBlack();
+    bool getDoubleBlack();
+    bool getNULL();
     redBlackNode* getParent();
     redBlackNode* getLeftChild();
     redBlackNode* getRightChild();
     redBlackNode* getGrandParent();
     redBlackNode* getUncle();
+    redBlackNode* getSibling();
 };
 #endif /* red_blackNode_hpp */

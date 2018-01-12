@@ -31,7 +31,19 @@ int main(int argc, const char * argv[]) {
     }
     //tree->traverseAndPrintInorder(tree->getRoot()); // 1 2 3 4 5 6 7 8
     //tree->traverseAndPrintPreorder(tree->getRoot()); // 4 2 1 3 6 5 7 8
-    tree->traverseAndPrintPostorder(tree->getRoot()); // 1 3 2 5 8 7 6 4
+    //tree->traverseAndPrintPostorder(tree->getRoot()); // 1 3 2 5 8 7 6 4
+    redBlackNode*target=tree->findNode(4);
+    if(target!=NULL){
+        std::cout<<target->getValue()<<" is in the tree"<<std::endl;
+    }
+    else{
+        std::cout<<"that is not in the tree"<<std::endl;
+    }
+    tree->removeNode(1);    //no child
+    tree->removeNode(2);    //left child
+    tree->removeNode(7);    //right child
+    tree->removeNode(4);    //two children
+    tree->traverseAndPrintInorder(tree->getRoot()); // 3 5 6 8
     /*
     tree->insertNode(10);
     tree->insertNode(20);

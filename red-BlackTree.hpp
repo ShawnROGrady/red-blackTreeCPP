@@ -17,16 +17,22 @@ private:
     int blackHeight;
 protected:
     void checkInsert(redBlackNode* newNode);
+    void checkRemove(redBlackNode* target, redBlackNode* replacement);
     void leftRotate(redBlackNode* pivot, redBlackNode* parent);
     void rightRotate(redBlackNode* pivot, redBlackNode* parent);
     void leftLeftCase(redBlackNode*grandparent, redBlackNode*parent);
     void rightRightCase(redBlackNode*grandparent, redBlackNode*parent);
+    void removeNoChild(redBlackNode* target, redBlackNode*parent);
+    void removeLeftChild(redBlackNode* target, redBlackNode*parent);
+    void removeRightChild(redBlackNode* target, redBlackNode* parent);
+    void removeTwoChild(redBlackNode* target, redBlackNode* rightTreeMin);
+    redBlackNode* findSubtreeMin(redBlackNode* subTreeRoot);
 public:
     redBlackTree();
     bool isEmpty();
     redBlackNode *getRoot();
     void insertNode(int newEntry);
-    void removeNode(redBlackNode* target);
+    void removeNode(int target);
     void traverseAndPrintInorder(redBlackNode *root);
     void traverseAndPrintPreorder(redBlackNode *root);
     void traverseAndPrintPostorder(redBlackNode *root);
