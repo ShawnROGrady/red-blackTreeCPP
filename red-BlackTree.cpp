@@ -211,6 +211,12 @@ void redBlackTree::traverseAndPrintPreorder(redBlackNode *root){
     }
     else{
         std::cout<<root->getValue();
+        if(root->getBlack()){
+            std::cout<<" black";
+        }
+        else{
+            std::cout<<" red";
+        }
         std::cout<<std::endl;
         traverseAndPrintPreorder(root->getLeftChild());
         traverseAndPrintPreorder(root->getRightChild());
