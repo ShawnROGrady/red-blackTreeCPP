@@ -11,19 +11,29 @@
 //constructors
 redBlackNode::redBlackNode(){
     //default
+    value=NULL;
     parent=NULL;
     leftChild=NULL;
     rightChild=NULL;
-    black=false; //I am making each node red by default
+    black=true;
     doubleBlack=false;
+    isNULL=true;
 }
 redBlackNode::redBlackNode(int v){
     value=v;
     black=false; //I am making each node red by default
     doubleBlack=false;
     parent=NULL;
+    isNULL=false;
+    /*
     leftChild=NULL;
     rightChild=NULL;
+    */
+    
+    leftChild=new redBlackNode;
+    rightChild=new redBlackNode;
+     
+    
 }
 
 //setters:
@@ -54,6 +64,9 @@ bool redBlackNode::getBlack(){
 }
 bool redBlackNode::getDoubleBlack(){
     return doubleBlack;
+}
+bool redBlackNode::getNULL(){
+    return isNULL;
 }
 redBlackNode* redBlackNode::getParent(){
     return parent;
