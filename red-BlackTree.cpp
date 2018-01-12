@@ -281,24 +281,26 @@ void redBlackTree::removeNode(int target){
                 replacementNode=parent->getRightChild();
             }
             replacementNode->setParent(parent);
+            checkRemove(targetNode, replacementNode);    //rebalance the tree
         }
         else if(!(targetNode->getLeftChild()->getNULL())&&(targetNode->getRightChild()->getNULL())){
             //Case 2(a): only left child
             replacementNode=targetNode->getLeftChild();
             removeLeftChild(targetNode, parent);
+            checkRemove(targetNode, replacementNode);    //rebalance the tree
         }
         else if((targetNode->getLeftChild()->getNULL())&&!(targetNode->getRightChild()->getNULL())){
             //Case 2(b):only right child
             replacementNode=targetNode->getRightChild();
             removeRightChild(targetNode, parent);
+            checkRemove(targetNode, replacementNode);    //rebalance the tree
         }
         else{
             //Case 3: two children
             redBlackNode *subTreeMin=findSubtreeMin(targetNode->getRightChild());
-            replacementNode=subTreeMin;
             removeTwoChild(targetNode, subTreeMin);
+            checkRemove(subTreeMin, targetNode);    //rebalance the tree
         }
-        checkRemove(targetNode, replacementNode);    //rebalance the tree
     }
 }
 void redBlackTree::removeNoChild(redBlackNode *target, redBlackNode *parent){
@@ -389,22 +391,30 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                                  if(!((sibling->getLeftChild())->getBlack())){
                                      //left left case
                                      leftLeftCase(parent, sibling);
+                                     replacement->setDoubleBlack(false);
+                                     sibling->getLeftChild()->setBlack(true);
                                  }
                                  else if(!((sibling->getRightChild())->getBlack())){
                                      //left right case
                                      leftRotate(sibling, parent);
                                      leftLeftCase(parent, sibling);
+                                     replacement->setDoubleBlack(false);
+                                     sibling->getRightChild()->setBlack(true);
                                  }
                              }
                              else if(parent->getRightChild()==sibling){
                                  if(!((sibling->getRightChild())->getBlack())){
                                      //right right case
                                      rightRightCase(parent,sibling);
+                                     replacement->setDoubleBlack(false);
+                                     sibling->getRightChild()->setBlack(true);
                                  }
                                  else if(!((sibling->getLeftChild())->getBlack())){
                                      //right left case
                                      rightRotate(sibling, parent);
                                      rightRightCase(parent, sibling);
+                                     replacement->setDoubleBlack(false);
+                                     sibling->getLeftChild()->setBlack(true);
                                  }
                              }
                          }
