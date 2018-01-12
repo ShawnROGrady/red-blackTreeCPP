@@ -197,7 +197,7 @@ void redBlackTree::rightRightCase(redBlackNode *grandparent, redBlackNode *paren
 }
 //Traverse+Print Algorithms
 void redBlackTree::traverseAndPrintInorder(redBlackNode *root){
-    if(root==NULL){
+    if(root->getNULL()){
         return;
     }
     else{
@@ -225,7 +225,7 @@ void redBlackTree::traverseAndPrintPreorder(redBlackNode *root){
     }
 }
 void redBlackTree::traverseAndPrintPostorder(redBlackNode *root){
-    if(root==NULL){
+    if(root->getNULL()){
         return;
     }
     else{
