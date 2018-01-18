@@ -486,6 +486,7 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                     //sibling to replacement is red
                     if(parent->getLeftChild()==sibling){
                         //left case
+                        parent->setBlack(false);
                         rightRotate(sibling, parent);
                     }
                     else if(parent->getRightChild()==sibling){
