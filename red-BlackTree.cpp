@@ -66,7 +66,7 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
     }
     redBlackNode *parent=newNode->getParent();
     if(parent!=NULL){
-        if((!parent->getBlack())||newNode!=root){
+        if((!parent->getBlack())){
             //if newNode's parent is not black or x is not root
             redBlackNode *grandparent=newNode->getGrandParent();
             if(grandparent!=NULL){
