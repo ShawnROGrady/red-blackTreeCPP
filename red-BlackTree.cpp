@@ -148,10 +148,10 @@ void redBlackTree::leftRotate(redBlackNode *pivot, redBlackNode *parent){
     }
     pivot->setParent(parent->getParent());
     if(parent->getParent()!=NULL){
-        (parent->getParent())->setRightChild(pivot);
+        (parent->getParent())->setLeftChild(pivot);
     }
     parent->setRightChild(pivot->getLeftChild());
-    if(pivot->getLeftChild()!=NULL){
+    if(!(pivot->getLeftChild()->getNULL())){
         (pivot->getLeftChild())->setParent(parent);
     }
     pivot->setLeftChild(parent);
@@ -164,7 +164,7 @@ void redBlackTree::rightRotate(redBlackNode *pivot, redBlackNode *parent){
     }
     pivot->setParent(parent->getParent());
     if(parent->getParent()!=NULL){
-        (parent->getParent())->setLeftChild(pivot);
+        (parent->getParent())->setRightChild(pivot);
     }
     parent->setLeftChild(pivot->getRightChild());
     if(pivot->getRightChild()!=NULL){
@@ -398,10 +398,10 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                                  }
                                  else if(!((sibling->getRightChild())->getBlack())){
                                      //left right case
-                                     leftRotate(sibling, parent);
-                                     leftLeftCase(parent, sibling);
+                                     leftRotate(sibling->getRightChild(), sibling);
+                                     leftLeftCase(parent, parent->getLeftChild());
                                      replacement->setDoubleBlack(false);
-                                     sibling->getRightChild()->setBlack(true);
+                                     parent->setBlack(true);
                                      root->setBlack(true);
                                  }
                              }
@@ -415,7 +415,7 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                                  }
                                  else if(!((sibling->getLeftChild())->getBlack())){
                                      //right left case
-                                     rightRotate(sibling, parent);
+                                     rightRotate(parent, sibling);
                                      rightRightCase(parent, sibling);
                                      replacement->setDoubleBlack(false);
                                      sibling->getLeftChild()->setBlack(true);
