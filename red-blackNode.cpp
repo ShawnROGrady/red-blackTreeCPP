@@ -98,7 +98,7 @@ redBlackNode* redBlackNode::getUncle(){
     return uncle;
 }
 redBlackNode* redBlackNode::getSibling(){
-    if(parent->getValue()>value){
+    if(parent->getLeftChild()->getValue()==value){
         //current node is left child
         return parent->getRightChild();
     }
