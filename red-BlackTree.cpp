@@ -381,7 +381,7 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
         redBlackNode *sibling;
         redBlackNode *parent=replacement->getParent();
         while(replacement->getDoubleBlack()&&replacement!=root){
-            sibling=target->getSibling();
+            sibling=replacement->getSibling();
             if(sibling!=NULL){
                 if(sibling->getBlack()){
                     //sibling to replacement is black
