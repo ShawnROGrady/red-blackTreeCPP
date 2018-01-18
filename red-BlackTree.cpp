@@ -7,15 +7,15 @@
 //
 /*
  For a red-black tree, every node follows the following rules (along w/ standard BST rules):
-    1. Every node has a color (red or black)
-    2. Root of the tree is always black
-    3. There ar no two adjacent red nodes
-        -i.e. a red node can't have a red parent or a red child
-    4. Every path from root to a NULL node has same number of black nodes
+ 1. Every node has a color (red or black)
+ 2. Root of the tree is always black
+ 3. There ar no two adjacent red nodes
+ -i.e. a red node can't have a red parent or a red child
+ 4. Every path from root to a NULL node has same number of black nodes
  +I currently believe I can:
-    -Insert a value
-    -search the tree
-*/
+ -Insert a value
+ -search the tree
+ */
 #include <iostream>
 #include "red-BlackTree.hpp"
 
@@ -78,10 +78,10 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                         uncle->setBlack(true);
                         grandparent->setBlack(false);
                         /*
-                        //swap newNode and newNode's grandparent
-                        int newNodeValue=newNode->getValue();
-                        newNode->setValue(grandparent->getValue());
-                        grandparent->setValue(newNodeValue);
+                         //swap newNode and newNode's grandparent
+                         int newNodeValue=newNode->getValue();
+                         newNode->setValue(grandparent->getValue());
+                         grandparent->setValue(newNodeValue);
                          */
                         //repeat
                         checkInsert(grandparent);
@@ -148,10 +148,10 @@ void redBlackTree::leftRotate(redBlackNode *pivot, redBlackNode *parent){
     }
     pivot->setParent(parent->getParent());
     if(parent->getParent()!=NULL){
-        (parent->getParent())->setLeftChild(pivot);
+        (parent->getParent())->setRightChild(pivot);
     }
     parent->setRightChild(pivot->getLeftChild());
-    if(!(pivot->getLeftChild()->getNULL())){
+    if(pivot->getLeftChild()!=NULL){
         (pivot->getLeftChild())->setParent(parent);
     }
     pivot->setLeftChild(parent);
@@ -164,7 +164,7 @@ void redBlackTree::rightRotate(redBlackNode *pivot, redBlackNode *parent){
     }
     pivot->setParent(parent->getParent());
     if(parent->getParent()!=NULL){
-        (parent->getParent())->setRightChild(pivot);
+        (parent->getParent())->setLeftChild(pivot);
     }
     parent->setLeftChild(pivot->getRightChild());
     if(pivot->getRightChild()!=NULL){
@@ -386,58 +386,72 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                 if(sibling->getBlack()){
                     //sibling to replacement is black
                     if((sibling->getLeftChild()!=NULL)&&(sibling->getRightChild()!=NULL)){
-                         if(!((sibling->getLeftChild())->getBlack()&&(sibling->getRightChild())->getBlack())){
-                             //one of sibling's children is red
-                             if(parent->getLeftChild()==sibling){
-                                 if(!((sibling->getLeftChild())->getBlack())){
-                                     //left left case
-                                     leftLeftCase(parent, sibling);
-                                     replacement->setDoubleBlack(false);
-                                     sibling->getLeftChild()->setBlack(true);
-                                     root->setBlack(true);
-                                 }
-                                 else if(!((sibling->getRightChild())->getBlack())){
-                                     //left right case
-                                     leftRotate(sibling->getRightChild(), sibling);
-                                     leftLeftCase(parent, parent->getLeftChild());
-                                     replacement->setDoubleBlack(false);
-                                     parent->setBlack(true);
-                                     root->setBlack(true);
-                                 }
-                             }
-                             else if(parent->getRightChild()==sibling){
-                                 if(!((sibling->getRightChild())->getBlack())){
-                                     //right right case
-                                     rightRightCase(parent,sibling);
-                                     replacement->setDoubleBlack(false);
-                                     sibling->getRightChild()->setBlack(true);
-                                     root->setBlack(true);
-                                 }
-                                 else if(!((sibling->getLeftChild())->getBlack())){
-                                     //right left case
-                                     rightRotate(parent, sibling);
-                                     rightRightCase(parent, sibling);
-                                     replacement->setDoubleBlack(false);
-                                     sibling->getLeftChild()->setBlack(true);
-                                     root->setBlack(true);
-                                 }
-                             }
-                         }
-                         else{
-                             //both of sibling's children are black
-                             replacement->setDoubleBlack(false);
-                             sibling->setBlack(false);
-                             if(parent->getBlack()){
+                        if(!((sibling->getLeftChild())->getBlack()&&(sibling->getRightChild())->getBlack())){
+                            //one of sibling's children is red
+                            if(parent->getLeftChild()==sibling){
+                                if(!((sibling->getLeftChild())->getBlack())){
+                                    //left left case
+                                    leftLeftCase(parent, sibling);
+                                    replacement->setDoubleBlack(false);
+                                    sibling->getLeftChild()->setBlack(true);
+                                    root->setBlack(true);
+                                }
+                                else if(!((sibling->getRightChild())->getBlack())){
+                                    //left right case
+                                    //leftRotate(sibling->getRightChild(), sibling);
+                                    redBlackNode *redChild=sibling->getRightChild();
+                                    if(root==sibling){
+                                        root=redChild;
+                                    }
+                                    redChild->setParent(sibling->getParent());
+                                    if(sibling->getParent()!=NULL){
+                                        (sibling->getParent())->setLeftChild(redChild);
+                                    }
+                                    sibling->setRightChild(redChild->getLeftChild());
+                                    if(redChild->getLeftChild()!=NULL){
+                                        (redChild->getLeftChild())->setParent(sibling);
+                                    }
+                                    redChild->setLeftChild(sibling);
+                                    sibling->setParent(redChild);
+                                    leftLeftCase(parent, parent->getLeftChild());
+                                    replacement->setDoubleBlack(false);
+                                    parent->setBlack(true);
+                                    root->setBlack(true);
+                                }
+                            }
+                            else if(parent->getRightChild()==sibling){
+                                if(!((sibling->getRightChild())->getBlack())){
+                                    //right right case
+                                    rightRightCase(parent,sibling);
+                                    replacement->setDoubleBlack(false);
+                                    sibling->getRightChild()->setBlack(true);
+                                    root->setBlack(true);
+                                }
+                                else if(!((sibling->getLeftChild())->getBlack())){
+                                    //right left case
+                                    rightRotate(parent, sibling);
+                                    rightRightCase(parent, sibling);
+                                    replacement->setDoubleBlack(false);
+                                    sibling->getLeftChild()->setBlack(true);
+                                    root->setBlack(true);
+                                }
+                            }
+                        }
+                        else{
+                            //both of sibling's children are black
+                            replacement->setDoubleBlack(false);
+                            sibling->setBlack(false);
+                            if(parent->getBlack()){
                                 //parent is black
-                                 parent->setDoubleBlack(true);
-                                 checkRemove(target, parent);
-                             }
-                             else{
-                                 //parent is red
-                                 parent->setBlack(true);
-                             }
-                         }
-                         
+                                parent->setDoubleBlack(true);
+                                checkRemove(target, parent);
+                            }
+                            else{
+                                //parent is red
+                                parent->setBlack(true);
+                            }
+                        }
+                        
                     }
                     else{
                         //both of siblings children are NULL, treat as black
@@ -480,7 +494,7 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                     parent->setBlack(true);
                 }
             }
-           
+            
         }
         if(replacement==root){
             replacement->setDoubleBlack(false);
