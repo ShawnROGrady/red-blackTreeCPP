@@ -429,10 +429,24 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                                 }
                                 else if(!((sibling->getLeftChild())->getBlack())){
                                     //right left case
-                                    rightRotate(parent, sibling);
-                                    rightRightCase(parent, sibling);
+                                    redBlackNode *redChild=sibling->getLeftChild();
+                                    //right rotate:
+                                    if(root==sibling){
+                                        root=redChild;
+                                    }
+                                    redChild->setParent(sibling->getParent());
+                                    if(sibling->getParent()!=NULL){
+                                        (sibling->getParent())->setRightChild(redChild);
+                                    }
+                                    sibling->setLeftChild(redChild->getRightChild());
+                                    if(redChild->getRightChild()!=NULL){
+                                        (redChild->getRightChild())->setParent(sibling);
+                                    }
+                                    redChild->setRightChild(sibling);
+                                    sibling->setParent(redChild);
+                                    rightRightCase(parent, parent->getRightChild());
                                     replacement->setDoubleBlack(false);
-                                    sibling->getLeftChild()->setBlack(true);
+                                    parent->setBlack(true);
                                     root->setBlack(true);
                                 }
                             }
