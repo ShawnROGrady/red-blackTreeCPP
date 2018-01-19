@@ -487,10 +487,13 @@ void redBlackTree::checkRemove(redBlackNode *target, redBlackNode *replacement){
                     if(parent->getLeftChild()==sibling){
                         //left case
                         parent->setBlack(false);
+                        sibling->setBlack(true);
                         rightRotate(sibling, parent);
                     }
                     else if(parent->getRightChild()==sibling){
                         //right case
+                        parent->setBlack(false);
+                        sibling->setBlack(true);
                         leftRotate(sibling, parent);
                     }
                 }
