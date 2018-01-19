@@ -99,9 +99,9 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                                 if(root==parent){
                                     root=newNode;
                                 }
-                                newNode->setParent(parent->getParent());
-                                if(parent->getParent()!=NULL){
-                                    (parent->getParent())->setLeftChild(newNode);
+                                newNode->setParent(grandparent);
+                                if(grandparent!=NULL){
+                                    grandparent->setLeftChild(newNode);
                                 }
                                 parent->setRightChild(newNode->getLeftChild());
                                 if(newNode->getLeftChild()!=NULL){
@@ -123,9 +123,9 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                                 if(root==parent){
                                     root=newNode;
                                 }
-                                newNode->setParent(parent->getParent());
-                                if(parent->getParent()!=NULL){
-                                    (parent->getParent())->setRightChild(newNode);
+                                newNode->setParent(grandparent);
+                                if(grandparent!=NULL){
+                                    (grandparent)->setRightChild(newNode);
                                 }
                                 parent->setLeftChild(newNode->getRightChild());
                                 if(newNode->getRightChild()!=NULL){
@@ -140,6 +140,7 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                 }
                 else{
                     //newNode's uncle is null, which is considered black
+                    //This should not ever happen since I redefined the nodes
                     if(grandparent->getLeftChild()==parent){
                         if(parent->getLeftChild()==newNode){
                             //left-left case
