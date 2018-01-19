@@ -95,8 +95,21 @@ void redBlackTree::checkInsert(redBlackNode *newNode){
                             }
                             else if(parent->getRightChild()==newNode){
                                 //left-right case
-                                leftRotate(newNode, parent);
-                                leftLeftCase(grandparent, parent);
+                                //leftRotate:
+                                if(root==parent){
+                                    root=newNode;
+                                }
+                                newNode->setParent(parent->getParent());
+                                if(parent->getParent()!=NULL){
+                                    (parent->getParent())->setLeftChild(newNode);
+                                }
+                                parent->setRightChild(newNode->getLeftChild());
+                                if(newNode->getLeftChild()!=NULL){
+                                    (newNode->getLeftChild())->setParent(parent);
+                                }
+                                newNode->setLeftChild(parent);
+                                parent->setParent(newNode);
+                                leftLeftCase(grandparent, newNode);
                             }
                         }
                         else if(grandparent->getRightChild()==parent){
